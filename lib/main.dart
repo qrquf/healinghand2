@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healing_hand/DoctorPages/DoctorDetailPage.dart';
 import 'package:healing_hand/DoctorPages/DoctorLandingPage.dart';
@@ -12,9 +13,22 @@ import 'package:healing_hand/pages/UserTypePage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
+
+
+
+
 String firstPage = 'onbording'; // when skips onboarding make it
 // userselection, when sighed in make it patient or doctor
-Widget page = Container(child: Text('error'),);void main() async {
+Widget page = Container(child: Text('error'),);
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -34,6 +48,9 @@ Widget page = Container(child: Text('error'),);void main() async {
   }
   runApp(const MyApp());
 }
+
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

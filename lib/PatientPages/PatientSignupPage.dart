@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:healing_hand/DoctorPages/DoctorDetailPage.dart';
-import 'package:healing_hand/DoctorPages/DoctorSignupPage.dart';
 import 'package:healing_hand/PatientPages/PatientDetailPage.dart';
 import 'package:healing_hand/PatientPages/PatientLandingPage.dart';
+import 'package:healing_hand/Services/Shared_preference_Services.dart';
 import 'package:healing_hand/apiconnection/userhttp.dart';
 import 'package:healing_hand/customWidgets/WhiteContainer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -178,7 +177,6 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
                                           'Successful\n'
                                               '${!isLogin? nameController.text:''}'
                                               '${phoneController.text}\n'
-                                              '${passwordController.text}'
                                       )
                                   )
                                 );
@@ -194,9 +192,12 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
 
                               if(j==0)
                               {
+                                // If the signup was sucessful the saving the sharedprefs
+                                SharedPreferenceServices.SaveEmail(emailController.text.toString());
+
                                   Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const PatientLandingPage())
+                                      MaterialPageRoute(builder: (context) =>  PatientLandingPage())
                                   );
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                   prefs.setString('FIRST_PAGE', 'patient');

@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healing_hand/PatientPages/PatientAccountPage.dart';
 import 'package:healing_hand/PatientPages/PatientHomePage.dart';
 import 'package:healing_hand/PatientPages/PatientAppointmentsPage.dart';
 import 'package:healing_hand/PatientPages/PatientSettingPage.dart';
+import 'package:healing_hand/Services/ChatServices/ChatPage%20(1).dart';
+import 'package:healing_hand/Services/ChatServices/ChatRoom.dart';
+
+
 
 class PatientLandingPage extends StatefulWidget {
-  const PatientLandingPage({super.key});
+
+
+   PatientLandingPage({super.key, });
 
   @override
   State<PatientLandingPage> createState() => _PatientLandingPageState();
@@ -14,6 +21,7 @@ class PatientLandingPage extends StatefulWidget {
 List<Widget> HomePageScreen = [
   PatientHomePage(),
   PatientSchedulePage(),
+  ChatPage2(usertype: 'patient'),
   PatientSettingPage(),
 ];
 
@@ -38,11 +46,15 @@ class _PatientLandingPageState extends State<PatientLandingPage> {
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
+
           NavigationDestination(
             selectedIcon: Icon(Icons.calendar_month),
             icon: Icon(Icons.calendar_month_outlined),
             label: 'Appointments',
           ),
+          NavigationDestination(
+              icon: Icon(Icons.message),
+              label: 'Chat'),
           NavigationDestination(
             //selectedIcon: Icon(),
             icon: Icon(Icons.settings),
